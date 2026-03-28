@@ -7,7 +7,7 @@ SRC_DIR := src
 OBJ_DIR := obj
 BIN_DIR := build
 
-TARGET  := $(BIN_DIR)/skanna
+TARGET  := $(BIN_DIR)/puroba
 SRCS    := $(wildcard $(SRC_DIR)/*.c)
 OBJS    := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/$(SRC_DIR)/%.c.o, $(SRCS))
 

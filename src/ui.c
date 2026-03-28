@@ -138,7 +138,7 @@ void render_ui(const char *distro,
 /* ------------------------------------------------------------------------- */
     // title bar 
     attron(COLOR_PAIR(5) | A_BOLD);
-    mvprintw(cur_y++, 1, " skanna ");
+    mvprintw(cur_y++, 1, " puroba ");
     attroff(A_BOLD | COLOR_PAIR(5));
     cur_y++; 
 
