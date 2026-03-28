@@ -1,0 +1,9 @@
+.cache/
+./vscode
+build/
+bin/
+*.o
+*.d
+obj/
+*.swp
+*~

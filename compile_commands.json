@@ -1,0 +1,40 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-std=c11",
+      "-O2",
+      "-D_XOPEN_SOURCE_EXTENDED",
+      "-D_DEFAULT_SOURCE",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "obj/src/main.c.o",
+      "src/main.c"
+    ],
+    "directory": "/home/alcestide/Git/alkbox/projects/skanna",
+    "file": "/home/alcestide/Git/alkbox/projects/skanna/src/main.c",
+    "output": "/home/alcestide/Git/alkbox/projects/skanna/obj/src/main.c.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-std=c11",
+      "-O2",
+      "-D_XOPEN_SOURCE_EXTENDED",
+      "-D_DEFAULT_SOURCE",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "obj/src/ui.c.o",
+      "src/ui.c"
+    ],
+    "directory": "/home/alcestide/Git/alkbox/projects/skanna",
+    "file": "/home/alcestide/Git/alkbox/projects/skanna/src/ui.c",
+    "output": "/home/alcestide/Git/alkbox/projects/skanna/obj/src/ui.c.o"
+  }
+]
