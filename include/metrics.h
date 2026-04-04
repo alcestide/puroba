@@ -6,6 +6,7 @@ typedef struct {
     unsigned long long user, nice, system, idle, iowait, irq, softirq;
 } cpu_stats_t;
 
+
 /** @struct mem_stats_t @brief Memory statistics in KBs */
 typedef struct {
     unsigned long total_mem, avail_mem;
@@ -20,8 +21,19 @@ typedef struct {
     int success;
 } disk_stats_t;
 
+/** @struct net_stats_t @brief Network metrics. */
+typedef struct {
+    unsigned long long rx_bytes;
+    unsigned long long tx_bytes;
+    double rx_rate;
+    double tx_rate;
+} net_stats_t;
+
 /** @brief Fetches current CPU ticks into s */
 void get_cpu_stats(cpu_stats_t *s);
+
+/** @brief Returns /proc/stats ticks */
+unsigned long long total_ticks(const cpu_stats_t *s);
 
 /** @brief Fetches current memory info into s */
 void get_mem_stats(mem_stats_t *s);
@@ -41,6 +53,9 @@ char *get_hostname(void);
  * @param stats [out] Struct to fill.
  * @note Uses statfs() to calculate total and available blocks. */
 void get_disk_stats(const char *path, disk_stats_t *stats);
+
+/** @brief Calculates RX and TX rates. */
+void get_net_stats(net_stats_t *stats);
 
 /** @brief Calculates CPU load % (delta) between two samples
  * @return Percentage (0.0 to 100.0) or 0.0 on zero delta */

@@ -1,11 +1,11 @@
-//#define _DEFAULT_SOURCE
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include <sys/statvfs.h>
 #include "metrics.h"
 
-static unsigned long long total_ticks(const cpu_stats_t *s) {
+unsigned long long total_ticks(const cpu_stats_t *s) {
     return s->user + s->nice + s->system + s->idle + s->iowait + s->irq + s->softirq;
 }
 
@@ -99,4 +99,58 @@ void get_disk_stats(const char *path, disk_stats_t *stats) {
     } else {
         stats->success = 0;
     }
+}
+
+void get_net_stats(net_stats_t *stats) {
+    FILE *fp = fopen("/proc/net/dev", "r");
+    if (!fp) return;
+
+    char line[256];
+    unsigned long long total_rx = 0, total_tx = 0;
+    unsigned long long r_bytes, t_bytes;
+    char iface[32];
+
+    // Skip the first two header lines
+    fgets(line, sizeof(line), fp);
+    fgets(line, sizeof(line), fp);
+
+    static unsigned long long prev_rx = 0;
+    static unsigned long long prev_tx = 0;
+    static struct timespec prev_time = {0};
+
+    while (fgets(line, sizeof(line), fp)) {
+        // interface name, then rx_bytes is the 1st digit, tx_bytes is the 9th
+        sscanf(line, " %[^:]: %llu %*u %*u %*u %*u %*u %*u %*u %llu", 
+               iface, &r_bytes, &t_bytes);
+
+        // Ignore loopback interface
+        if (strcmp(iface, "lo") != 0) {
+            total_rx += r_bytes;
+            total_tx += t_bytes;
+        }
+    }
+    fclose(fp);
+
+    // Calc rates
+    struct timespec curr_time;
+    clock_gettime(CLOCK_MONOTONIC, &curr_time);
+    
+    double elapsed = (curr_time.tv_sec - prev_time.tv_sec) + 
+                     (curr_time.tv_nsec - prev_time.tv_nsec) / 1000000000.0;
+
+    if (prev_time.tv_sec != 0 && elapsed > 0) {
+        stats->rx_rate = (double)(total_rx - prev_rx) / 1024.0 / elapsed;
+        stats->tx_rate = (double)(total_tx - prev_tx) / 1024.0 / elapsed;
+    } else {
+        stats->rx_rate = 0;
+        stats->tx_rate = 0;
+    }
+
+    // Update totals and static history
+    stats->rx_bytes = total_rx;
+    stats->tx_bytes = total_tx;
+    
+    prev_rx = total_rx;
+    prev_tx = total_tx;
+    prev_time = curr_time;
 }
