@@ -1,9 +1,0 @@
-- [x] Calculate CPU Usage
-- [x] Calculate Memory Usage
-- [x] Get Distro Name and Version
-- [x] Display Current Time
-- [x] Display Hostname
-- [x] Fetch '/' Disk Stats (Total, Avail, Used)
-- [-] Fully functional ncurses interface
-- [ ] Get Network Speed
-- [ ] List Processes
