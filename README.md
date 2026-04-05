@@ -9,6 +9,8 @@
 
 It provides real-time tracking of **CPU**, **memory**, **disk**, and **network** metrics through a modular, multi-tab interface designed for clarity and speed.
 
+<img width="1599" height="865" alt="image" src="https://github.com/user-attachments/assets/bbcb83d3-ad04-49fd-b50a-2a8dd0a0e515" />
+
 # Installation
 You will need ncurses development headers and make.
 
