@@ -12,7 +12,7 @@ It provides real-time tracking of **CPU**, **memory**, **disk**, and **network**
 <img width="1599" height="865" alt="image" src="https://github.com/user-attachments/assets/bbcb83d3-ad04-49fd-b50a-2a8dd0a0e515" />
 
 # Installation
-You will need ncurses development headers and make.
+To install puroba, you will mainly need "ncursesw" development headers and make.
 
 ### Ubuntu/Debian
 ```bash
@@ -21,7 +21,7 @@ sudo apt install libncursesw5-dev build-essential
 
 ### Build
 ```Bash
-git clone https://github.com/yourusername/puroba.git
+git clone https://github.com/alcestide/puroba.git
 cd puroba
 make
 ```
